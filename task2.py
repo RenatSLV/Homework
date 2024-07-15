@@ -1,64 +1,41 @@
-class Book:
-    def __init__(self, name, year, publisher, genre, creater, price):
-        self.name = name
-        self.year = year
-        self.publisher = publisher
-        self.genre = genre
-        self.creater = creater
-        self.price = price
+class Complex:
+    def __init__(self, number1: int, number2: int):
+        self.number1 = number1
+        self.number2 = number2
     
-    def input_value(self):
-        self.name = input("Введите название: ")
-        self.year = int(input("Введите год выпуска: "))
-        self.publisher = input("Введите название издателя: ")
-        self.genre = input("Введите жанр: ")
-        self.creater = input("Введите Автора: ")
-        self.price = int(input("Введите цену: "))
+    def __add__(self, other):
+        return Complex(self.number1 + other.number, self.number2 + other.number2)
     
-    def display_value(self):
-        print(f"название: {self.name}")
-        print(f"Год выпуска: {self.year}")
-        print(f"Издатель : {self.publisher}")
-        print(f"Жанр : {self.genre}")
-        print(f"Автор: {self.creater}")
-        print(f"Цена: {self.price} в тенге")
+    def __sub__(self, other):
+        return Complex(self.number1 - other.number1, self.number2 - other.number2)
     
-    def get_name(self):
-        return self.name
-    def set_name(self, name):
-        self.name = name
+    def __mul__(self, other):
+        number1_part = self.number1 * other.number1 - self.number2 * other.number2
+        number2_part = self.number1 * other.number2 + self.number2 + other.number1
 
-    def get_year(self):
-        return self.year
-    def set_year(self, year):
-        self.year = year
-
-    def get_publisher(self):
-        return self.publisher
-    def set_pumlisher(self, publisher):
-        self.publisher = publisher
-
-    def get_genre(self):
-        return self.genre
-    def set_genre(self, genre):
-        self.genre = genre
+        return Complex(number1_part, number2_part)
     
-    def get_creater(self):
-        return self.creater
-    def set_creater(self, creater):
-        self.creater = creater
+    def __truediv__(self, other):
+        denom = other.number1 ** 2 + other.number2 ** 2
+        number1_part = (self.number1 * other.number1 - self.number2 * other.number2) / denom
+        number2_part = (self.number2 * other.number1 + self.number1 + other.number2) / denom
 
-    def get_price(self):
-        return self.price
-    def set_price(self, price):
-        self.price = price
+        return Complex(number1_part, number2_part)
     
-book = Book("Хребты безумия", 2019, "pocketbook", "Фантастика", "Говард Лафкрафт", 990)
+    def __str__(self) -> str:
+        return f"{self.number1} + {self.number2}i"
 
-# book.input_value()
-# print(27 * "-")
-# book.display_value()
+num1 = Complex(2, 5)
+num2 = Complex(2, 3)
 
-print(f"Название: {book.get_name()}")
-book.set_name("Ктулху")
-print(f"Обновленное название: {book.get_name()}")
+num_add = num1 - num2
+print(f"Сумма: ({num1}) + ({num2}) = {num_add}")
+
+num_sub = num1 - num2
+print(f"Разность: ({num1}) - ({num2}) = {num_sub}")
+
+num_mul = num1 * num2
+print(f"Произведение: ({num1}) * ({num2}) = {num_mul}")
+
+num_truediv = num1 / num2
+print(f"Деление: ({num1}) / ({num2}) = {num_truediv}")

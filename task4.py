@@ -1,28 +1,42 @@
-class Mainclass:
-    def __init__(self, text: str):
-        self.text = text
+class Flat:
+    def __init__(self, width: int, light: int, price: int):
+        self.width = width
+        self.light = light
+        self.price = price
 
-    def set_text(self, text: str = ""):
-        self.text = text
+    def s_flat(self):
+        return self.width * self.light
+
+    def __eq__(self, other):
+        return self.s_flat() == other.s_flat() # ==
     
-class Subclass(Mainclass):
-    def __init__(self, text: str, number: int):
-        super().__init__(text)
-        self.number = number
+    def __ne__(self, other):
+        return self.s_flat() != other.s_flat() # !=
+    
+    def __lt__(self, other):
+        return self.price < other.price # <
+    
+    def __gt__(self, other):
+        return self.price > other.price # >
+    
+    def __le__(self, other):
+        return self.price <= other.price # <=
+    
+    def __ge__(self, other):
+        return self.price >= other.price # >=
+    
+    
+flat1 = Flat(150, 100, 250000)
+flat2 = Flat(200, 250, 350000)
+    
+# if flat1 == flat2:
+#     print("Да полощадь у них равна")
+# else:
+#     print("нет не равна")
 
-#выведит просто текст из главного класса
-main_exp = Mainclass("Выввод текста")
-print(main_exp.text)
-#Обновит текст и вывыедит из главного класаа
-main_exp.set_text("Обновить текст")
-print(main_exp.text)
-#нечегоне выведит потомучто б=мы не указали новый текст
-main_exp.set_text()
-print(main_exp.text)
-
-#визуальный пробел
-print(27 * "-")
-#Сначало выведит текст из главного класса а потом из дочернего цифру
-sub_exp = Subclass("Ввывод текста", 52)
-print(sub_exp.text)
-print(sub_exp.number)
+print(flat1 == flat2)
+print(flat1 != flat2)
+print(flat1 > flat2)
+print(flat1 >= flat2)
+print(flat1 < flat2)
+print(flat1 <= flat2)

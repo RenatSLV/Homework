@@ -1,56 +1,55 @@
-class Stadium:
-    def __init__(self, name, date_opening, country, town, contain):
-        self.name = name
-        self.date_opening = date_opening
-        self.country = country
-        self.town = town
+class Airplane:
+    def __init__(self, class_airplans: str, contain: int, max_contain: int):
+        self.class_airplans = class_airplans
         self.contain = contain
+        self.max_contain = max_contain
 
-    def input_value(self):
-        self.name = input("Введите название стадиона: ")
-        self.date_opening = int(input("Введите дату открытия: "))
-        self.country = input("введите строну: ")
-        self.town = input("Введите город: ")
-        self.contain = int(input("Введите вмeстимость"))
-
-    def display_value(self):
-        print(f"Название стадиона: {self.name}")
-        print(f"Дата открытие: {self.date_opening}")
-        print(f"Навание строны: {self.country}")
-        print(f"Название города: {self.town}")
-        print(f"Вместимость стадиона: {self.contain}")
-
-    def get_name(self):
-        return self.name
-    def set_name(self, name):
-        self.name = name
-
-    def get_date_opening(self):
-        return self.date_opening
-    def set_date_opening(self, date_opening):
-        self.date_opening = date_opening
-
-    def get_country(self):
-        return self.country
-    def set_country(self, country):
-        self.country = country
+    def __eq__(self, other):
+        return self.class_airplans == other.class_airplans # ==
     
-    def get_town(self):
-        return self.town
-    def set_town(self, town):
-        self.town = town
+    def __lt__(self, other):
+        return self.max_contain < other.max_contain # <
+    
+    def __gt__(self, other):
+        return self.max_contain > other.max_contain # >
+    
+    def __le__(self, other):
+        return self.max_contain <= other.max_contain # <=
+    
+    def __ge__(self, other):
+        return self.max_contain >= other.max_contain # >=
+    
+    def __add__(self, num: int):
+        return self.contain + num # +
+    
+    def __sub__(self, num: int):
+        return self.contain - num # -
+    
+    def __iadd__(self, num: int):
+        self.contain += num # +=
+        return self
+    
+    def __isub__(self, num: int):
+        self.contain -= num # -=
+        return self
+    
+    def __repr__(self):
+        return f"Вместимость = {self.contain}"
+    
+air1 = Airplane("class A", 150, 200)
+air2 = Airplane("class A", 100, 150)
 
-    def get_contain(self):
-        return self.contain
-    def set_contain(self, contain):
-        self.contain = contain
+print(air1 == air2)
+print(air1 < air2)
+print(air1 > air2)
+print(air1 <= air2)
+print(air1 >= air2)
 
-stadium = Stadium("Энфилд", 1884, "Англия", "Ливерпуль", 61217)
+print(air1 + 20)
+print(air2 - 20)
 
-# stadium.input_value()
-# print(27 * "-")
-# stadium.display_value()
+air1 += 100
+print(air1)
 
-print(f"Название стадиона: {stadium.get_name()}")
-stadium.set_name("Бруклин")
-print(f"Обновленное название: {stadium.get_name()}")
+air2 -= 10
+print(air2)
